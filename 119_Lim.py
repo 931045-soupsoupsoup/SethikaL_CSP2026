@@ -56,6 +56,8 @@ wn.update()
 wn.tracer(1)
 
 # Cake platter
+icing.speed(100) # change speed if needed
+
 icing.penup()
 icing.color("lightsalmon4")
 icing.fillcolor("lightsalmon4")
@@ -89,6 +91,31 @@ icing.circle(-60, 80)
 icing.end_fill()
 icing.penup()
 icing.hideturtle()
+
+# draw icing 
+icing.showturtle()
+icing.penup()
+icing.color("black")
+icing.fillcolor("black")
+icing.pensize(5)
+icing.goto(-160, 150)
+
+icing.pendown()
+icing.begin_fill()
+icing.setheading(0)
+icing.forward(380)
+icing.circle(-60, 80)
+icing.setheading(270)
+icing.forward(50)
+icing.setheading(180)
+icing.forward(490)
+icing.setheading(90)
+icing.forward(41)
+icing.circle(-60, 80)
+icing.end_fill()
+icing.penup()
+
+icing.goto(-180, 50)
 
 # Keep the window open
 wn.mainloop()
