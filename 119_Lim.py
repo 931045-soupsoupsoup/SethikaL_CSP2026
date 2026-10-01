@@ -5,6 +5,15 @@ wn = trtl.Screen()
 wn.tracer(0)
 wn.bgcolor("burlywood3")
 
+#create backdrop for a totally not low quality immersive environment
+backdrop = trtl.Turtle()
+backdrop.color("lightcyan")
+backdrop.pensize(500)
+backdrop.penup()
+backdrop.goto(-1000, 230)
+backdrop.pendown()
+backdrop.forward(5000)
+
 # Turtles
 # Create custom turtle and register it
 custom_polygon = ((0, -6), (6, -5), (8, -4), (9, 0), (0, 10), (-9, 0), (-8, -4), (-6, -5), (0, -6))
@@ -122,7 +131,7 @@ for i in range(len(icing_colors)):
 # list of toppings
 icing.speed(5)
 topping_shapes = ["triangle", "circle", "cream", "square", "circle"]
-topping_colors = ["indianred1", "royalblue", "antiquewhite1", "saddlebrown", "khaki"]
+topping_colors = ["indianred1", "royalblue", "antiquewhite1", "black", "khaki"]
 topping_name = ["strawberry", "blueberry", "cream", "chocolate", "banana"]
 
 # ask user for toppings
@@ -166,8 +175,10 @@ for i in range(len(topping_shapes)):
       icing.stamp()
       icing.forward(60)
 
-# yay
-answer = trtl.textinput("Congrats! You have made your cake!","Though uh.. um. it looks kinda ugly. sorry. Just replay the program at this point. or leave it for the next person to see.. yup.")
+# Display text and keep it on the program unless program has been manually reset. No clicking ok or cancel. you're stuck here. jeez.
+text_stay = True
+while text_stay == True:
+  answer = trtl.textinput("Congrats! You have made your cake!","Though uh.. um. it looks kinda ugly. sorry. Just replay the program at this point. or leave it for the next person to see.. yup.")
 
 # Keep the window open
 wn.mainloop()
