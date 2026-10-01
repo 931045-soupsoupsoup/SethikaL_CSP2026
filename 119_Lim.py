@@ -18,45 +18,6 @@ whip_cream.color("antiquewhite3")
 whip_cream.fillcolor("antiquewhite1")
 whip_cream.hideturtle()
 
-# -------------------------------------------------
-# use this just incase for debugging
-'''
-# ***
-strawberry_top = trtl.Turtle()
-strawberry_top.shape("triangle")
-strawberry_top.color("indianred2")
-strawberry_top.fillcolor("indianred1")
-# ***
-blueberry_top = trtl.Turtle()
-blueberry_top.shape("circle")
-blueberry_top.color("royalblue2")
-blueberry_top.fillcolor("royalblue")
-# ***
-chocolate_top = trtl.Turtle()
-chocolate_top.shape("square")
-chocolate_top.color("saddlebrown")
-chocolate_top.fillcolor("saddlebrown")
-# ***
-banana_top = trtl.Turtle()
-banana_top.shape("circle")
-banana_top.color("gold1")
-banana_top.fillcolor("khaki")
-
-# check toppings (debug)
-strawberry_top.goto(50, 10)
-blueberry_top.goto(10, 50)
-banana_top.goto(150, 50)
-chocolate_top.goto(100, 15)
-whip_cream.goto(30, 20)
-
-# hide turtles
-strawberry_top.hideturtle()
-blueberry_top.hideturtle()
-chocolate_top.hideturtle()
-banana_top.hideturtle()
-whip_cream.hideturtle()'''
-# -------------------------------------------------
-
 # *** Definitions ***
 def draw_icing():
   icing.showturtle()
@@ -93,7 +54,7 @@ def draw_icing():
   icing.penup()
 
 def base_cake():
-  icing.speed(0) # change speed if needed
+  icing.speed(5)
 
   # cake platter
   icing.penup()
@@ -145,6 +106,7 @@ else:
 
 
 # draws icing + list
+icing.speed(50)
 icing_colors = ["lightpink", "lightskyblue", "mintcream", "chocolate4", "gold"]
 icing_flavors = ["strawberry", "blueberry", "vanilla", "chocolate", "banana"]
 
@@ -158,6 +120,7 @@ for i in range(len(icing_colors)):
 
 # draws toppings
 # list of toppings
+icing.speed(5)
 topping_shapes = ["triangle", "circle", "cream", "square", "circle"]
 topping_colors = ["indianred1", "royalblue", "antiquewhite1", "saddlebrown", "khaki"]
 topping_name = ["strawberry", "blueberry", "cream", "chocolate", "banana"]
@@ -204,7 +167,7 @@ for i in range(len(topping_shapes)):
       icing.forward(60)
 
 # yay
-answer = trtl.textinput("Wow uh.. um. it looks kinda ugly. sorry.","Just replay the program at this point. or leave it for the next person to see.. yup.")
+answer = trtl.textinput("Congrats! You have made your cake!","Though uh.. um. it looks kinda ugly. sorry. Just replay the program at this point. or leave it for the next person to see.. yup.")
 
 # Keep the window open
 wn.mainloop()
