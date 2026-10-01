@@ -10,13 +10,17 @@ wn.bgcolor("burlywood3")
 custom_polygon = ((0, -6), (6, -5), (8, -4), (9, 0), (0, 10), (-9, 0), (-8, -4), (-6, -5), (0, -6))
 wn.register_shape("cream", custom_polygon)
 
-# Create whip cream as a custom turtle and rename other turtle variables
+# Create whip cream as a custom turtle
 icing = trtl.Turtle() # initial turtle to draw out cake before toppings
-
 whip_cream = trtl.Turtle()
 whip_cream.shape("cream")
 whip_cream.color("antiquewhite3")
 whip_cream.fillcolor("antiquewhite1")
+whip_cream.hideturtle()
+
+# -------------------------------------------------
+# use this just incase for debugging
+'''
 # ***
 strawberry_top = trtl.Turtle()
 strawberry_top.shape("triangle")
@@ -38,19 +42,20 @@ banana_top.shape("circle")
 banana_top.color("gold1")
 banana_top.fillcolor("khaki")
 
-# check toppings (use for debug if needed)
-'''strawberry_top.goto(50, 10)
+# check toppings (debug)
+strawberry_top.goto(50, 10)
 blueberry_top.goto(10, 50)
 banana_top.goto(150, 50)
 chocolate_top.goto(100, 15)
-whip_cream.goto(30, 20)'''
+whip_cream.goto(30, 20)
 
 # hide turtles
 strawberry_top.hideturtle()
 blueberry_top.hideturtle()
 chocolate_top.hideturtle()
 banana_top.hideturtle()
-whip_cream.hideturtle()
+whip_cream.hideturtle()'''
+# -------------------------------------------------
 
 # *** Definitions ***
 def draw_icing():
@@ -125,6 +130,12 @@ def base_cake():
   icing.penup()
   icing.hideturtle()
 
+def topping_stamp():
+  for tops in range(10):
+    icing.shape(topping_shapes[i])
+    icing.stamp()
+    icing.forward(50)
+
 # update screen
 wn.update()
 wn.tracer(1)
@@ -140,7 +151,7 @@ else:
   base_cake()
 
 
-# draws icing
+# draws icing + list
 icing_colors = ["lightpink", "lightskyblue", "mintcream", "chocolate4", "gold"]
 icing_flavors = ["strawberry", "blueberry", "vanilla", "chocolate", "banana"]
 
@@ -153,6 +164,33 @@ for i in range(len(icing_colors)):
     draw_icing()
   '''elif (answer != "icing_flavors"):
     answer = trtl.textinput("We do not have that in supply. Please choose another.","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana")'''
+
+# draws toppings
+# list of toppings
+topping_shapes = ["triangle", "circle", "cream", "square", "circle"]
+topping_colors = ["indianred1", "royalblue", "antiquewhite1", "saddlebrown", "khaki"]
+topping_name = ["strawberry", "blueberry", "cream", "chocolate", "banana"]
+
+# ask user for toppings
+# topping layer 1
+icing.goto(-185, -200)
+icing.shapesize(3)
+
+answer = trtl.textinput("Time for toppings!!!","OPTIONS: Strawberry, Blueberry, Cream, Chocolate, Banana")
+for i in range(len(topping_shapes)):
+  if (answer == topping_name[i] and topping_shapes[i] and topping_colors[i]):
+    for tops in range(8):
+      icing.shape(topping_shapes[i])
+      icing.color(topping_colors[i])
+      icing.stamp()
+      icing.forward(60)
+
+
+
+
+
+
+
 
 # Keep the window open
 wn.mainloop()
