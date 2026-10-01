@@ -140,7 +140,6 @@ def topping_stamp():
 wn.update()
 wn.tracer(1)
 
-
 # *** This section begins the program the user sees ***
 
 # starting screen
@@ -156,14 +155,12 @@ icing_colors = ["lightpink", "lightskyblue", "mintcream", "chocolate4", "gold"]
 icing_flavors = ["strawberry", "blueberry", "vanilla", "chocolate", "banana"]
 
 # ask user what flavor
-answer = trtl.textinput("What flavor would you like?","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana")
+answer = trtl.textinput("What flavor would you like?","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana (we don't have anything else in supply... so if you ask for something else we wont put it.)")
 for i in range(len(icing_colors)):
   if (answer == icing_flavors[i] and icing_colors[i]):
     icing.color(icing_colors[i])
     icing.fillcolor(icing_colors[i])
     draw_icing()
-  '''elif (answer != "icing_flavors"):
-    answer = trtl.textinput("We do not have that in supply. Please choose another.","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana")'''
 
 # draws toppings
 # list of toppings
@@ -177,7 +174,7 @@ icing.goto(-182, -205)
 icing.shapesize(5)
 icing.tilt(90) # keeps the turtle facing north the entire time
 
-answer = trtl.textinput("Time for toppings!!!","OPTIONS: Strawberry, Blueberry, Cream, Chocolate, Banana")
+answer = trtl.textinput("Time for toppings!!!","OPTIONS: Strawberry, Blueberry, Cream, Chocolate, Banana (we don't have anything else in supply... so if you ask for something else we wont put it.)")
 for i in range(len(topping_shapes)):
   if (answer == topping_name[i] and topping_shapes[i] and topping_colors[i]):
     for tops in range(8):
@@ -212,11 +209,8 @@ for i in range(len(topping_shapes)):
       icing.stamp()
       icing.forward(60)
 
-
-
-
-
-
+# yay
+answer = trtl.textinput("Wow uh.. um. it looks kinda ugly. sorry.","Just replay the program at this point. or leave it for the next person to see.. yup.")
 
 # Keep the window open
 wn.mainloop()
