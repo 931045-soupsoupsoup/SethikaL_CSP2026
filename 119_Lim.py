@@ -173,8 +173,9 @@ topping_name = ["strawberry", "blueberry", "cream", "chocolate", "banana"]
 
 # ask user for toppings
 # topping layer 1
-icing.goto(-185, -200)
-icing.shapesize(3)
+icing.goto(-182, -205)
+icing.shapesize(5)
+icing.tilt(90) # keeps the turtle facing north the entire time
 
 answer = trtl.textinput("Time for toppings!!!","OPTIONS: Strawberry, Blueberry, Cream, Chocolate, Banana")
 for i in range(len(topping_shapes)):
@@ -185,6 +186,31 @@ for i in range(len(topping_shapes)):
       icing.stamp()
       icing.forward(60)
 
+# topping layer 2
+icing.goto(-180, 80)
+icing.shapesize(3)
+
+answer = trtl.textinput("Why dont you pick another topping?","OPTIONS: Strawberry, Blueberry, Cream, Chocolate, Banana")
+for i in range(len(topping_shapes)):
+  if (answer == topping_name[i] and topping_shapes[i] and topping_colors[i]):
+    for tops in range(8):
+      icing.shape(topping_shapes[i])
+      icing.color(topping_colors[i])
+      icing.stamp()
+      icing.forward(60)
+
+# topping layer 3
+icing.goto(-90, 130)
+icing.shapesize(2)
+
+answer = trtl.textinput("One more wouldn't hurt... right?","OPTIONS: Strawberry, Blueberry, Cream, Chocolate, Banana")
+for i in range(len(topping_shapes)):
+  if (answer == topping_name[i] and topping_shapes[i] and topping_colors[i]):
+    for tops in range(5):
+      icing.shape(topping_shapes[i])
+      icing.color(topping_colors[i])
+      icing.stamp()
+      icing.forward(60)
 
 
 
