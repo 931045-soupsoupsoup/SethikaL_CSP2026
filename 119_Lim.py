@@ -52,7 +52,7 @@ chocolate_top.hideturtle()
 banana_top.hideturtle()
 whip_cream.hideturtle()
 
-# Definitions
+# *** Definitions ***
 def draw_icing():
   icing.showturtle()
   icing.penup()
@@ -83,6 +83,9 @@ def draw_icing():
     icing.end_fill()
     icing.penup()
     icing.forward(120)
+
+  icing.hideturtle()
+  icing.penup()
 
 def base_cake():
   icing.speed(0) # change speed if needed
@@ -126,6 +129,7 @@ def base_cake():
 wn.update()
 wn.tracer(1)
 
+
 # *** This section begins the program the user sees ***
 
 # starting screen
@@ -136,25 +140,19 @@ else:
   base_cake()
 
 
-# draws icing ////// work on debugging this section
+# draws icing
 icing_colors = ["lightpink", "lightskyblue", "mintcream", "chocolate4", "gold"]
 icing_flavors = ["strawberry", "blueberry", "vanilla", "chocolate", "banana"]
 
 # ask user what flavor
-user_index= trtl.
 answer = trtl.textinput("What flavor would you like?","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana")
-for i in range(icing_colors):
-
-if (answer == icing_flavors):
-
-
-  
-''' icing.color(icing_colors)
-  icing.fillcolor()
-draw_icing()'''
-
-answer = trtl.textinput("We do not have that in supply. Please choose another.","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana")
-
+for i in range(len(icing_colors)):
+  if (answer == icing_flavors[i] and icing_colors[i]):
+    icing.color(icing_colors[i])
+    icing.fillcolor(icing_colors[i])
+    draw_icing()
+  '''elif (answer != "icing_flavors"):
+    answer = trtl.textinput("We do not have that in supply. Please choose another.","OPTIONS: Strawberry, Blueberry, Vanilla, Chocolate, Banana")'''
 
 # Keep the window open
 wn.mainloop()
