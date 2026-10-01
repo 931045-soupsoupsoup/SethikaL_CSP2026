@@ -130,12 +130,6 @@ def base_cake():
   icing.penup()
   icing.hideturtle()
 
-def topping_stamp():
-  for tops in range(10):
-    icing.shape(topping_shapes[i])
-    icing.stamp()
-    icing.forward(50)
-
 # update screen
 wn.update()
 wn.tracer(1)
