@@ -48,12 +48,32 @@ def start_screen():
 def start_click(x,y):
   trtl.clearscreen()
   wn.bgcolor("darkolivegreen3")
+  initial_turtle()
 
-#-----game-configuration--------------
+#-----game configuration--------------
+timer = 30
+counter_interval = 1000   #1000 represents 1 second
+timer_up = False
+
+score = 0
+
+turtles = ["raccoon", "bird"]
+points = [10, 0]
 
 
+#-----initialize turtle---------------
+def initial_turtle():
+  for t in turtles:
+    raccoon = trtl.Turtle(shape=t)
+    raccoon.penup()
+    raccoon.turtlesize(3)
+    raccoon.goto(50, 100)
 
-#-----initialize-turtle---------------
+    bird = trtl.Turtle()
+    bird.penup()
+    bird.turtlesize(3)
+
+#-----game functions------------------
 
 
 #-----events--------------------------
