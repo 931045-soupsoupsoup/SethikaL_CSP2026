@@ -48,7 +48,7 @@ def start_screen():
 def start_click(x,y):
   trtl.clearscreen()
   wn.bgcolor("darkolivegreen3")
-  initial_turtle()
+  gamescreen()
 
 #-----game configuration--------------
 timer = 30
@@ -61,21 +61,43 @@ turtles = ["raccoon", "bird"]
 points = [10, 0]
 
 
+
 #-----initialize turtle---------------
 def initial_turtle():
-  for t in turtles:
-    raccoon = trtl.Turtle(shape=t)
-    raccoon.penup()
-    raccoon.turtlesize(3)
-    raccoon.goto(50, 100)
+  raccoon = trtl.Turtle()
+  raccoon.penup()
+  raccoon.turtlesize(5)
+  raccoon.goto(50, 100)
 
-    bird = trtl.Turtle()
-    bird.penup()
-    bird.turtlesize(3)
+  bird = trtl.Turtle()
+  bird.penup()
+  bird.turtlesize(5)
+
+def score_text():
+  score_writer = trtl.Turtle()
+  score_writer.hideturtle()
+  score_writer.speed()
+  score_writer.penup()
+  score_writer.goto(-480, 300)
+  score_writer.write("test", font=title_font)
+
+def counter():
+  counter =  trtl.Turtle()
+  counter.hideturtle()
+  counter.speed(0)
+  counter.penup()
+  counter.goto(-200, 300)
+  counter.write("test", font=title_font)
+
+def change_position():
+  xcor = rand.randint(-250, 250)
+  ycor = rand.randint(-200, 200)
 
 #-----game functions------------------
-
-
+def gamescreen():
+  score_text()
+  counter()
+  initial_turtle()
 #-----events--------------------------
 wn = trtl.Screen()
 wn.setup(width=1000, height=900)
@@ -89,5 +111,6 @@ b_start.onclick(start_click)
 
 # game screen
 
+# restart game: could add a onclick to reset game OR add reset button while game runtime
 
 wn.mainloop()
