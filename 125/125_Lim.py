@@ -1,9 +1,8 @@
 import turtle as trtl 
 import random as rand
-
+wn = trtl.Screen()
 
 # ----instructions screen-----------------
-# instructions text
 text = trtl.Turtle()
 text.color("black")
 title_font = ("Comic Sans MS", 30, "bold")
@@ -22,6 +21,7 @@ b_start.goto(0, -100)
 
 indent = -350
 
+# instructions text
 def start_screen():
   text.penup()
   text.goto(-200, 300)
@@ -45,6 +45,12 @@ def start_screen():
   text.pendown()
   text.write("> DO NOT. hit the BIRD.", font=text_font)
 
+  text.penup()
+  text.goto(-70, -200)
+  text.color("black")
+  text.pendown()
+  text.write("^^Play!^^", font=text_font)
+
 # After start button is pressed, change screen + Clears screen without erasing all of the turtles made (raccoon, bird): debugged
 def start_click(x,y):
   text.clear()
@@ -67,33 +73,41 @@ score = 0
 turtles = ["raccoon", "bird"]
 points = [10, 0]
 
-boundary_xy = (-200, 200) # Marks the boundary coordinates the turtle can go to -- change later ts is temporary
+bound_x = -380, 380 # Boundary coordinates the turtle can go to for x
+bound_y = -350, 200 # Boundary coordinates the turtle can go to for y
 
 
 
 #-----initialize turtle---------------
 raccoon = trtl.Turtle()
+raccoon.hideturtle()
 raccoon.color("red")
 raccoon.penup()
-raccoon.turtlesize(5)
+raccoon.turtlesize(10)
 raccoon.goto(50, 100)
-raccoon.hideturtle()
 
 bird = trtl.Turtle()
-bird.penup()
-bird.turtlesize(5)
 bird.hideturtle()
+bird.penup()
+bird.turtlesize(10)
 
 score_writer = trtl.Turtle()
 score_writer.hideturtle()
 
+counter = trtl.Turtle()
+counter.hideturtle()
+counter.speed(0)
+counter.penup()
+counter.goto(-200, 300)
+
 def raccoon_clicked(x,y):
-  #raccoon.hideturtle()
+  raccoon.hideturtle()
 
   global timer
   if timer != 0:
     update_score()
     change_position()
+    raccoon.showturtle()
     
   else:
     raccoon.hideturtle()
@@ -104,32 +118,24 @@ def score_text():
   score_writer.speed(0)
   score_writer.penup()
   score_writer.goto(-480, 300)
-  score_writer.write("Score:", font=title_font)
+  score_writer.write("Score: " + str(score), font=title_font)
 
-def counter():
-  counter =  trtl.Turtle()
-  counter.hideturtle()
-  counter.speed(0)
-  counter.penup()
-  counter.goto(-200, 300)
-  counter.write("Time:", font=title_font)
-
-def change_position(raccoon):
-  xcor = rand.randint(boundary_xy)
-  ycor = rand.randint(boundary_xy)
+def change_position():
+  xcor = rand.randint(-380, 380)
+  ycor = rand.randint(-350, 200)
   raccoon.goto(xcor, ycor)
 
-def random_position(raccoon):
-  x_rand = rand.randint(boundary_xy)
-  y_rand = rand.randint(boundary_xy)
+def random_position(): # randomly changes position of turtle during runtime
+  x_rand = rand.randint(-380, 380)
+  y_rand = rand.randint(-350, 200)
   raccoon.goto(x_rand, y_rand)
 
 def update_score():
   global score
   score += 1
-  score_writer.write(score, font=title_font)
+  score_writer.write("Score: " + str(score), font=title_font)
   score_writer.clear()
-  score_writer.write(score, font=title_font)
+  score_writer.write("Score: " + str(score), font=title_font)
 
 def countdown():
   global timer, timer_up
@@ -141,20 +147,17 @@ def countdown():
   else:
     counter.write("Timer: " + str(timer), font=title_font)
     timer -= 1
-    counter.getscreen().ontimer(countdown, counter_interval) 
+    counter.getscreen().ontimer(countdown, counter_interval)
 
 #-----game functions------------------
 def gamescreen():
   raccoon.showturtle()
-  bird.showturtle()
+  #bird.showturtle()
   score_text()
-  counter()
-  
+  countdown()
+  wn.ontimer(countdown, counter_interval) 
 
-def raccoon_onclick(raccoon):
-  raccoon.onclick(raccoon_clicked)
 #-----events--------------------------
-wn = trtl.Screen()
 wn.title("Whack...a......Raccoon..........??????")
 wn.setup(width=1000, height=900)
 wn.cv._rootwindow.resizable(False, False)
@@ -163,12 +166,12 @@ wn.cv._rootwindow.resizable(False, False)
 wn.tracer(0)
 start_screen()
 wn.tracer(1)
-b_start.onclick(start_click)
-raccoon.onclick(raccoon_clicked)
-wn.ontimer(countdown, counter_interval) 
-wn.ontimer(random_position, counter_interval)
 
 # game screen
+b_start.onclick(start_click)
+raccoon.onclick(raccoon_clicked)
+
+# wn.ontimer(random_position, counter_interval)
 
 # restart game: could add a onclick to reset game OR add reset button while game runtime
 
