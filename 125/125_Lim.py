@@ -20,6 +20,20 @@ b_start.penup()
 b_start.speed(0)
 b_start.goto(0, -100)
 
+# reset button initialize
+reset = trtl.Turtle()
+reset.hideturtle()
+reset.shape("square")
+reset.turtlesize(5)
+reset.color("red")
+reset.penup()
+reset.speed(0)
+reset.goto(0, -100)
+
+# reset screen initialize
+drawer = trtl.Turtle()
+drawer.hideturtle()
+
 indent = -400
 
 # instructions text
@@ -52,7 +66,7 @@ def start_screen():
   text.write("> DO NOT. hit the bird.", font=text_font)
 
   text.penup()
-  text.goto(-70, -200)
+  text.goto(-55, -200)
   text.color("black")
   text.pendown()
   text.write("^^Play!^^", font=text_font)
@@ -67,14 +81,15 @@ def start_click(x,y):
 
 #-----game configuration--------------
 # game runtime timer
-timer = 3
+timer = 20
 counter_interval = 1500   #1000 represents 1 second
 timer_up = False
 
 trtl_counter = 2000 # counter interval to change position of turtle
 score = 0
 
-turtles = []
+bird_counter = 1000 # yeah
+
 points = [10, -20]
 
 #-----initialize turtle---------------
@@ -153,16 +168,10 @@ def bird_change_position():
   xcor = rand.randint(-380, 380)
   ycor = rand.randint(-350, 200)
   bird.goto(xcor, ycor)
-  wn.ontimer(bird_change_position, trtl_counter)
+  wn.ontimer(bird_change_position, bird_counter)
 
 def update_score():
   global score
-  '''for i in range(len(points)):
-    if (turtles[i] == points[0]):
-      score += (points[0])
-
-    else: 
-      score += (points[1])'''
   score_writer.write("Score: " + str(score), font=title_font)
   score_writer.clear()
   score_writer.write("Score: " + str(score), font=title_font)
@@ -174,6 +183,7 @@ def countdown():
     counter.write("Time's Up", font=title_font)
     timer_up = True
     endscreen()
+
      
   else:
     counter.write("Timer: " + str(timer), font=title_font)
@@ -182,7 +192,7 @@ def countdown():
 
 # Results screen
 def endscreen():
-  drawer = trtl.Turtle()
+
   drawer.speed(0)
   drawer.hideturtle()
   drawer.penup()
@@ -213,16 +223,29 @@ def endscreen():
   text.write("Restart?", font=title_font)
 
   # reset button
-  reset = trtl.Turtle()
-  reset.shape("square")
-  reset.turtlesize(5)
-  reset.color("red")
-  reset.penup()
-  reset.speed(0)
-  reset.goto(0, -100)
+  reset.showturtle()
 
+  reset_click()
+
+def reset_click(x,y): 
+  wn.ontimer(countdown, counter_interval)
+  wn.ontimer(change_position, trtl_counter)
+  wn.ontimer(bird_change_position, bird_counter)
+
+  text.clear()
+  drawer.clear()
+  reset.hideturtle()
+  gamescreen()
+  update_score()
+
+  
 #-----game functions------------------
 def gamescreen():
+  global score
+  score = 0
+  global timer
+  timer = 20
+
   raccoon.showturtle()
   bird.showturtle()
   score_text()
@@ -230,7 +253,6 @@ def gamescreen():
   change_position()
   wn.ontimer(countdown, counter_interval) 
 
-  # wn.ontimer(add_raccoon, pos_count)
 #-----events--------------------------
 wn.title("Whack...a......Raccoon..........??????")
 wn.setup(width=1000, height=900)
@@ -246,7 +268,7 @@ b_start.onclick(start_click)
 raccoon.onclick(lambda x, y: raccoon_clicked(x, y, 0))
 bird.onclick(lambda x, y: bird_clicked(x, y, 1))
 
-
-# restart game: could add a onclick to reset game OR add reset button while game runtime
+# restart game
+reset.onclick(reset_click)
 
 wn.mainloop()
