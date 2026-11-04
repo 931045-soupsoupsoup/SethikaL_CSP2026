@@ -1,5 +1,7 @@
 import turtle as trtl 
 import random as rand
+
+
 wn = trtl.Screen()
 
 # ----instructions screen-----------------
@@ -109,6 +111,9 @@ bird.hideturtle()
 bird.penup()
 bird.turtlesize(10)
 
+explosion = "GitHubCSP2026/125/explode.gif"
+wn.addshape(explosion)
+
 score_writer = trtl.Turtle()
 score_writer.hideturtle()
 
@@ -136,6 +141,7 @@ def raccoon_clicked(x,y, index):
   raccoon.showturtle()
 
 def bird_clicked(x,y, index):
+  bird.shape(explosion)
   bird.hideturtle()
 
   global timer
@@ -148,8 +154,9 @@ def bird_clicked(x,y, index):
     bird.showturtle()
     
   else:
+    bird.shape(explosion)
     bird.hideturtle()
-  bird.showturtle()
+  bird.shape(bird_img)
 
 def score_text():
   score_writer.hideturtle()
