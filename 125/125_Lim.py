@@ -68,7 +68,7 @@ trtl_counter = 3000 # counter interval to change position of turtle
 score = 0
 
 turtles = []
-points = [10, 0]
+points = [10, -5]
 
 #-----initialize turtle---------------
 '''for i in range(len(points)):
@@ -127,11 +127,15 @@ def raccoon_clicked(x,y, index):
     raccoon.hideturtle()
   raccoon.showturtle()
 
-def bird_clicked(x,y):
+def bird_clicked(x,y, index):
   bird.hideturtle()
 
   global timer
   if timer != 0:
+    global score
+    gained_points = points[index]
+    score += gained_points
+    update_score()
     bird_change_position()
     bird.showturtle()
     
@@ -153,9 +157,9 @@ def change_position():
   wn.ontimer(change_position, trtl_counter)
 
 def bird_change_position():
-  bxcor = rand.randint(-380, 380)
-  bycor = rand.randint(-350, 200)
-  bird.goto(bxcor, bycor)
+  xcor = rand.randint(-380, 380)
+  ycor = rand.randint(-350, 200)
+  bird.goto(xcor, ycor)
   wn.ontimer(change_position, trtl_counter)
 
 def update_score():
@@ -206,7 +210,7 @@ wn.tracer(1)
 # game screen
 b_start.onclick(start_click)
 raccoon.onclick(lambda x, y: raccoon_clicked(x, y, 0))
-bird.onclick(bird_clicked)
+bird.onclick(lambda x, y: bird_clicked(x, y, 1))
 
 
 # restart game: could add a onclick to reset game OR add reset button while game runtime
