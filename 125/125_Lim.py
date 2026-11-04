@@ -67,7 +67,7 @@ def start_click(x,y):
 
 #-----game configuration--------------
 # game runtime timer
-timer = 5
+timer = 3
 counter_interval = 1500   #1000 represents 1 second
 timer_up = False
 
@@ -78,11 +78,6 @@ turtles = []
 points = [10, -20]
 
 #-----initialize turtle---------------
-'''for i in range(len(points)):
-  t = trtl.Turtle()
-  t.penup()
-  turtles.append(t)'''
-
 raccoon_img = "GitHubCSP2026/125/raccoon.gif"
 wn.addshape(raccoon_img)
 raccoon = trtl.Turtle(shape=raccoon_img)
@@ -107,19 +102,6 @@ counter.hideturtle()
 counter.speed(0)
 counter.penup()
 counter.goto(-200, 300)
-
-'''def t_clicked(x,y):
-  t.hideturtle()
-  
-  global timer
-  if timer != 0:
-    update_score()
-    change_position()
-    t.showturtle()
-    
-  else:
-    t.hideturtle()
-  t.showturtle()'''
 
 def raccoon_clicked(x,y, index):
   raccoon.hideturtle()
@@ -206,12 +188,38 @@ def endscreen():
   drawer.penup()
   drawer.pencolor("white")
   drawer.fillcolor("white")
-  drawer.goto(-400, 300)
+  drawer.goto(-600, -400)
   drawer.pendown()
   drawer.setheading(0)
+  drawer.right(45)
   drawer.begin_fill()
-  drawer.circle(500, steps=4)
+  drawer.circle(800, steps=4)
   drawer.end_fill()
+
+  text.penup()
+  text.goto(-175, 300)
+  text.pendown()
+  text.write("FINAL RESULTS:", font=title_font)
+
+  global score
+  text.penup()
+  text.goto(-260, 100)
+  text.pendown()
+  text.write("You have gained " + str(score) + " points!", font=title_font)
+
+  text.penup()
+  text.goto(-80, 0)
+  text.pendown()
+  text.write("Restart?", font=title_font)
+
+  # reset button
+  reset = trtl.Turtle()
+  reset.shape("square")
+  reset.turtlesize(5)
+  reset.color("red")
+  reset.penup()
+  reset.speed(0)
+  reset.goto(0, -100)
 
 #-----game functions------------------
 def gamescreen():
