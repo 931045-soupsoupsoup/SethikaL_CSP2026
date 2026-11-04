@@ -61,12 +61,13 @@ def start_click(x,y):
 #-----game configuration--------------
 # game runtime timer
 timer = 30
-counter_interval = 1000   #1000 represents 1 second
+counter_interval = 1500   #1000 represents 1 second
 timer_up = False
 
 # timer to change position of turtle
 pos_timer = 30
 pos_timer_up = False
+pos_count = 8000
 
 score = 0
 
@@ -100,6 +101,8 @@ counter.speed(0)
 counter.penup()
 counter.goto(-200, 300)
 
+
+
 def raccoon_clicked(x,y):
   raccoon.hideturtle()
 
@@ -124,11 +127,6 @@ def change_position():
   xcor = rand.randint(-380, 380)
   ycor = rand.randint(-350, 200)
   raccoon.goto(xcor, ycor)
-
-def random_position(): # randomly changes position of turtle during runtime
-  x_rand = rand.randint(-380, 380)
-  y_rand = rand.randint(-350, 200)
-  raccoon.goto(x_rand, y_rand)
 
 def update_score():
   global score
@@ -156,6 +154,8 @@ def gamescreen():
   score_text()
   countdown()
   wn.ontimer(countdown, counter_interval) 
+  wn.ontimer(change_position, counter_interval) # change position of turtle during runtime
+  change_position()
 
 #-----events--------------------------
 wn.title("Whack...a......Raccoon..........??????")
@@ -171,7 +171,7 @@ wn.tracer(1)
 b_start.onclick(start_click)
 raccoon.onclick(raccoon_clicked)
 
-# wn.ontimer(random_position, counter_interval)
+
 
 # restart game: could add a onclick to reset game OR add reset button while game runtime
 
