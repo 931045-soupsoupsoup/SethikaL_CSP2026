@@ -7,6 +7,7 @@ text = trtl.Turtle()
 text.color("black")
 title_font = ("Comic Sans MS", 30, "bold")
 text_font = ("Comic Sans MS", 20, "normal")
+sub_font = ("Comic Sans MS", 10, "normal")
 text.speed(0)
 text.hideturtle()
 
@@ -19,7 +20,7 @@ b_start.penup()
 b_start.speed(0)
 b_start.goto(0, -100)
 
-indent = -350
+indent = -400
 
 # instructions text
 def start_screen():
@@ -29,9 +30,14 @@ def start_screen():
   text.write("Whack a... Raccoon?", font=title_font)
 
   text.penup()
+  text.goto(-235, 280)
+  text.pendown()
+  text.write("(Except you have to chase them out of your yard. You'll know what I mean.)", font=sub_font)
+
+  text.penup()
   text.goto(indent, 200)
   text.pendown()
-  text.write("> Hit raccoons to gain 10 points!", font=text_font)
+  text.write("> Hit raccoons to gain 10 points! They might get fast... or teleport.", font=text_font)
 
   text.penup()
   text.goto(indent, 100)
@@ -43,7 +49,7 @@ def start_screen():
   text.goto(indent, 0)
   text.color("red")
   text.pendown()
-  text.write("> DO NOT. hit the BIRD.", font=text_font)
+  text.write("> DO NOT. hit the bird.", font=text_font)
 
   text.penup()
   text.goto(-70, -200)
@@ -56,19 +62,20 @@ def start_click(x,y):
   text.clear()
   b_start.hideturtle()
   wn.bgcolor("darkolivegreen3")
+  wn.bgpic("GitHubCSP2026/125/grassbg.png")
   gamescreen()
 
 #-----game configuration--------------
 # game runtime timer
-timer = 45
+timer = 5
 counter_interval = 1500   #1000 represents 1 second
 timer_up = False
 
-trtl_counter = 3000 # counter interval to change position of turtle
+trtl_counter = 2000 # counter interval to change position of turtle
 score = 0
 
 turtles = []
-points = [10, -5]
+points = [10, -20]
 
 #-----initialize turtle---------------
 '''for i in range(len(points)):
@@ -76,14 +83,18 @@ points = [10, -5]
   t.penup()
   turtles.append(t)'''
 
-raccoon = trtl.Turtle()
+raccoon_img = "GitHubCSP2026/125/raccoon.gif"
+wn.addshape(raccoon_img)
+raccoon = trtl.Turtle(shape=raccoon_img)
 raccoon.hideturtle()
 raccoon.color("red")
 raccoon.penup()
 raccoon.turtlesize(10)
 raccoon.goto(50, 100)
 
-bird = trtl.Turtle()
+bird_img = "GitHubCSP2026/125/bird.gif"
+wn.addshape(bird_img)
+bird = trtl.Turtle(shape=bird_img)
 bird.hideturtle()
 bird.penup()
 bird.turtlesize(10)
@@ -160,7 +171,7 @@ def bird_change_position():
   xcor = rand.randint(-380, 380)
   ycor = rand.randint(-350, 200)
   bird.goto(xcor, ycor)
-  wn.ontimer(change_position, trtl_counter)
+  wn.ontimer(bird_change_position, trtl_counter)
 
 def update_score():
   global score
@@ -180,12 +191,27 @@ def countdown():
   if timer <= 0:
     counter.write("Time's Up", font=title_font)
     timer_up = True
+    endscreen()
      
-
   else:
     counter.write("Timer: " + str(timer), font=title_font)
     timer -= 1
     counter.getscreen().ontimer(countdown, counter_interval)
+
+# Results screen
+def endscreen():
+  drawer = trtl.Turtle()
+  drawer.speed(0)
+  drawer.hideturtle()
+  drawer.penup()
+  drawer.pencolor("white")
+  drawer.fillcolor("white")
+  drawer.goto(-400, 300)
+  drawer.pendown()
+  drawer.setheading(0)
+  drawer.begin_fill()
+  drawer.circle(500, steps=4)
+  drawer.end_fill()
 
 #-----game functions------------------
 def gamescreen():
