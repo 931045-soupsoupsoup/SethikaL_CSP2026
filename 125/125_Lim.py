@@ -122,6 +122,7 @@ counter.speed(0)
 counter.penup()
 counter.goto(-200, 300)
 
+#-----game functions------------------
 def raccoon_clicked(x,y, index):
   raccoon.hideturtle()
 
@@ -243,7 +244,7 @@ def reset_click(x,y):
   gamescreen()
   update_score()
 
-#-----game functions------------------
+
 def gamescreen():
   global score
   score = 0
