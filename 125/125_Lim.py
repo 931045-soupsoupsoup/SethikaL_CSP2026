@@ -1,7 +1,6 @@
 import turtle as trtl 
 import random as rand
 
-
 wn = trtl.Screen()
 
 # ----instructions screen-----------------
@@ -59,13 +58,13 @@ def start_screen():
   text.goto(indent, 100)
   text.color("red")
   text.pendown()
-  text.write("> Do not hit the bird.", font=text_font)
+  text.write("> Do not hit the bird. (-20)", font=text_font)
 
   text.penup()
   text.goto(indent, 0)
   text.color("red")
   text.pendown()
-  text.write("> DO NOT. hit the bird.", font=text_font)
+  text.write("> DO NOT. hit the bird. It's la peaceful.", font=text_font)
 
   text.penup()
   text.goto(-55, -200)
@@ -225,13 +224,12 @@ def endscreen():
   text.write("You have gained " + str(score) + " points!", font=title_font)
 
   text.penup()
-  text.goto(-80, 0)
+  text.goto(-400, 0)
   text.pendown()
-  text.write("Restart?", font=title_font)
+  text.write("Restart? (hard reset to see instructions)", font=title_font)
 
   # reset button
   reset.showturtle()
-
   reset_click()
 
 def reset_click(x,y): 
@@ -245,7 +243,6 @@ def reset_click(x,y):
   gamescreen()
   update_score()
 
-  
 #-----game functions------------------
 def gamescreen():
   global score
